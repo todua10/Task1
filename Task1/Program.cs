@@ -37,6 +37,7 @@ namespace Task1
 
             };
             
+
             first.AddToOffer(productsList[0]);
             first.AddToOffer(productsList[4]);
             first.AddToOffer(productsList[7]);
@@ -54,11 +55,63 @@ namespace Task1
             
             leva.OffersOfStudents();
             leva.OffersOfStaff();
-            Console.WriteLine();
+            
             ProductEnum ProductList = new ProductEnum(productsList);
+            Console.WriteLine("Перечисление:\n");
             foreach (Product p in ProductList)
                 Console.WriteLine($"{p.Name} - {p.GetCost()}");
 
+            
+            Console.WriteLine("\nСортировка по имени:\n");
+            ProductList.SortByName();
+            foreach (Product p in ProductList)
+                Console.WriteLine($"{p.Name} - {p.GetCost()}");
+            Console.WriteLine();
+
+
+            Console.WriteLine("Сортировка по стоимости:\n");
+            ProductList.SortByCost();
+            foreach (Product p in ProductList)
+                Console.WriteLine($"{p.Name} - {p.GetCost()}");
+            Console.WriteLine();
+
+            List<double> costs = new List<double>();
+            foreach (Product p in ProductList)
+            {
+                costs.Add(p.GetCost());
+            }
+            costs.ToArray();
+            for (int i = 0; i < costs.Count; i++)
+            {
+                Console.WriteLine(costs[i]);
+            }
+            Console.WriteLine();
+
+            void Comparation(int a, int b) 
+            {
+                if (costs[a] > costs[b])
+                    Console.WriteLine($"{a} элемент больше элемента {b}");
+                else
+                    Console.WriteLine($"{b} элемент больше элемента {a}");
+            }
+
+            void Operation(int a, int b, Action<int, int> op) => op(a, b);
+
+            Operation(0, 1, Comparation);
+
+            double DoOperation(int a, Func<int, double> op) => op(a);
+            double Compare(int a)
+            {
+                if (costs[a] > costs[a - 1])
+                    return costs[a];
+                else
+                    return costs[a-1];
+            }
+            
+            double result = DoOperation(1, Compare);
+
+            Console.WriteLine($"Большая стоимость из двух - {result}"); 
+            
             Console.ReadLine();
         }
     }

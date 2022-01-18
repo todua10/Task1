@@ -29,7 +29,7 @@ namespace Task1
             Size = size;
             Price = prices[name];
         }
-        public double GetCost() 
+        public double GetCost()
         {
             return Price * Size;
         }
@@ -48,7 +48,20 @@ namespace Task1
                 _productEnum[i] = prArray[i];
             }
         }
-
+        public void SortByName()
+        {
+            Array.Sort(_productEnum, delegate (Product product1, Product product2)
+                {
+                    return product1.Name.CompareTo(product2.Name);
+                });
+        }
+        public void SortByCost()
+        {
+            Array.Sort(_productEnum, delegate (Product product1, Product product2)
+            {
+                return product1.GetCost().CompareTo(product2.GetCost());
+            });
+        }
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
