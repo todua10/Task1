@@ -14,8 +14,8 @@ namespace Task1
             
             Console.WriteLine($"Кассир: {leva.NameOnBadge}\n");
             
-            Client first = new Client(1);
-            Client second = new Client(2);
+            Student first = new Student(1);
+            Staff second = new Staff(2);
 
             Console.WriteLine($"Клиенты: {first.ID} и {second.ID}\n");
 
@@ -24,30 +24,32 @@ namespace Task1
 
             Console.WriteLine($"Столики: {table1.Number} и {table2.Number}\n");
 
-            Drink juice025 = new Drink("Сок", 0.25);
-            Drink juice05 = new Drink("Сок", 0.5);
-            Drink juice1 = new Drink("Сок", 1);
-            Drink cocoa025 = new Drink("Какао", 0.25);
-            Food noodle = new Food("Макароны", 0.2);
-            Food mashedPotatoes = new Food("Пюре", 0.2);
-            Food cutletChicken = new Food("Куриная котлета", 0.06);
-            Food cutletBeef= new Food("Говяжья котлета", 0.06);
+            Product juice025 = new Product("Сок", 0.25);
+            Product juice05 = new Product("Сок", 0.5);
+            Product juice1 = new Product("Сок", 1);
+            Product cocoa025 = new Product("Какао", 0.25);
+            Product noodle = new Product("Макароны", 0.2);
+            Product mashedPotatoes = new Product("Пюре", 0.2);
+            Product cutletChicken = new Product("Куриная котлета", 0.06);
+            Product cutletBeef = new Product("Говяжья котлета", 0.06);
 
             first.AddToOffer(juice025);
             first.AddToOffer(noodle);
             first.AddToOffer(cutletBeef);
-            leva.ConfirmPurchase(first.Purchase());
+            leva.ConfirmPurchase(first.Purchase(), first.rightsOfStaff);
             table1.isBusy = true;
 
             second.AddToOffer(juice05);
             second.AddToOffer(mashedPotatoes);
             second.AddToOffer(cutletChicken);
-            leva.ConfirmPurchase(second.Purchase());
+            leva.ConfirmPurchase(second.Purchase(), second.rightsOfStaff);
             table2.isBusy = true;
             
             first.Check();
             second.Check();
-            leva.OffersOfClients();
+            
+            leva.OffersOfStudents();
+            leva.OffersOfStaff();
 
             Console.ReadLine();
         }

@@ -8,27 +8,45 @@ namespace Task1
 {
     class Cashier
     {
-        private List<List<Product>> offers = new List<List<Product>>();
-        public List<List<Product>> Offers { get { return offers; } }
+        private List<List<Product>> offersStudents = new List<List<Product>>();
+        public List<List<Product>> OffersStudents { get { return offersStudents; } }
 
+        private List<List<Product>> offersStaff = new List<List<Product>>();
+        public List<List<Product>> OffersStaff { get { return offersStaff; } }
         public string NameOnBadge { get; set; }
         public Cashier(string name)
         {
             NameOnBadge = name;
         }
-        public void ConfirmPurchase(List<Product> offer)
+        public void ConfirmPurchase(List<Product> offer, bool rightsOfStaff)
         {
-            offers.Add(offer);
+            if (rightsOfStaff == false)
+                offersStudents.Add(offer);
+            else
+                offersStaff.Add(offer);
         }
-        public void OffersOfClients()
+        public void OffersOfStudents()
         {
-            Console.WriteLine("\nЗаказы клиентов: \n");
-            for (int i = 0; i < Offers.Count; i++)
+            Console.WriteLine("\nЗаказы студентов: \n");
+            for (int i = 0; i < OffersStudents.Count; i++)
             {
                 Console.WriteLine($"Заказ №{i + 1}: \n");
-                for (int j = 0; j < Offers[i].Count; j++)
+                for (int j = 0; j < OffersStudents[i].Count; j++)
                 {
-                    Console.WriteLine($"{Offers[i][j].Name} - {Offers[i][j].GetCost()}");
+                    Console.WriteLine($"{OffersStudents[i][j].Name} - {OffersStudents[i][j].GetCost()}");
+                }
+                Console.WriteLine();
+            }
+        }
+        public void OffersOfStaff()
+        {
+            Console.WriteLine("\nЗаказы персонала: \n");
+            for (int i = 0; i < OffersStaff.Count; i++)
+            {
+                Console.WriteLine($"Заказ №{i + 1}: \n");
+                for (int j = 0; j < OffersStaff[i].Count; j++)
+                {
+                    Console.WriteLine($"{OffersStaff[i][j].Name} - {OffersStaff[i][j].GetCost() * 0.9}");
                 }
                 Console.WriteLine();
             }

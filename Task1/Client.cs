@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace Task1
 {
-    class Client
+    abstract class Client
     {
         public int ID { get; set; }
+        public bool rightsOfStaff { get; set; }
         private List<Product> offer = new List<Product>();
         public List<Product> Offer { get { return offer; } }
 
@@ -30,14 +31,6 @@ namespace Task1
             return offer;
         }
 
-        public void Check()
-        {
-            Console.WriteLine($"Чек об оплате клиента {ID}: \n");
-            for (int i = 0; i < Offer.Count; i++)
-            {
-                Console.WriteLine($"{Offer[i].Name} - {Offer[i].GetCost()}");
-            }
-            Console.WriteLine($"Итого - {Sum}\n");
-        }
+        public abstract void Check();
     }
 }
