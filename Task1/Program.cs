@@ -24,24 +24,28 @@ namespace Task1
 
             Console.WriteLine($"Столики: {table1.Number} и {table2.Number}\n");
 
-            Product juice025 = new Product("Сок", 0.25);
-            Product juice05 = new Product("Сок", 0.5);
-            Product juice1 = new Product("Сок", 1);
-            Product cocoa025 = new Product("Какао", 0.25);
-            Product noodle = new Product("Макароны", 0.2);
-            Product mashedPotatoes = new Product("Пюре", 0.2);
-            Product cutletChicken = new Product("Куриная котлета", 0.06);
-            Product cutletBeef = new Product("Говяжья котлета", 0.06);
+            Product[] productsList = new Product[8]
+            {
+                new Product("Сок", 0.25),
+                new Product("Сок", 0.5),
+                new Product("Сок", 1),
+                new Product("Какао", 0.25),
+                new Product("Макароны", 0.2),
+                new Product("Пюре", 0.2),
+                new Product("Куриная котлета", 0.06),
+                new Product("Говяжья котлета", 0.06),
 
-            first.AddToOffer(juice025);
-            first.AddToOffer(noodle);
-            first.AddToOffer(cutletBeef);
+            };
+            
+            first.AddToOffer(productsList[0]);
+            first.AddToOffer(productsList[4]);
+            first.AddToOffer(productsList[7]);
             leva.ConfirmPurchase(first.Purchase(), first.rightsOfStaff);
             table1.isBusy = true;
 
-            second.AddToOffer(juice05);
-            second.AddToOffer(mashedPotatoes);
-            second.AddToOffer(cutletChicken);
+            second.AddToOffer(productsList[1]);
+            second.AddToOffer(productsList[5]);
+            second.AddToOffer(productsList[6]);
             leva.ConfirmPurchase(second.Purchase(), second.rightsOfStaff);
             table2.isBusy = true;
             
@@ -50,6 +54,10 @@ namespace Task1
             
             leva.OffersOfStudents();
             leva.OffersOfStaff();
+            Console.WriteLine();
+            ProductEnum ProductList = new ProductEnum(productsList);
+            foreach (Product p in ProductList)
+                Console.WriteLine($"{p.Name} - {p.GetCost()}");
 
             Console.ReadLine();
         }
