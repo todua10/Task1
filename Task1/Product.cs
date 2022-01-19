@@ -34,7 +34,7 @@ namespace Task1
             return Price * Size;
         }
     }
-    public class ProductEnum : IEnumerable
+    public class ProductEnum : IEnumerable<Product>
     {
 
         private Product[] _productEnum;
@@ -48,6 +48,7 @@ namespace Task1
                 _productEnum[i] = prArray[i];
             }
         }
+        
         public void SortByName()
         {
             Array.Sort(_productEnum, delegate (Product product1, Product product2)
@@ -66,16 +67,15 @@ namespace Task1
         {
             return GetEnumerator();
         }
-
-        public ProductEnumerator GetEnumerator()
+        public IEnumerator<Product> GetEnumerator()
         {
             return new ProductEnumerator(_productEnum);
         }
     }
 
-    public class ProductEnumerator : IEnumerator
+    public class ProductEnumerator : IEnumerator<Product>
     {
-        public Product[] _productEnum;
+        private Product[] _productEnum;
 
         int position = -1;
 
@@ -94,7 +94,6 @@ namespace Task1
         {
             position = -1;
         }
-
         object IEnumerator.Current
         {
             get 
@@ -116,6 +115,9 @@ namespace Task1
                     throw new InvalidOperationException();
                 }
             }
+        }
+        public void Dispose()
+        { 
         }
     }
 }

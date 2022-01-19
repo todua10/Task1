@@ -74,13 +74,14 @@ namespace Task1
             foreach (Product p in ProductList)
                 Console.WriteLine($"{p.Name} - {p.GetCost()}");
             Console.WriteLine();
-
+            
             List<double> costs = new List<double>();
             foreach (Product p in ProductList)
             {
                 costs.Add(p.GetCost());
             }
             costs.ToArray();
+            Console.WriteLine("Список стоимостей:\n");
             for (int i = 0; i < costs.Count; i++)
             {
                 Console.WriteLine(costs[i]);
@@ -110,7 +111,7 @@ namespace Task1
             
             double result = DoOperation(1, Compare);
 
-            Console.WriteLine($"Большая стоимость из двух - {result}"); 
+            Console.WriteLine($"Большая стоимость из первых двух - {result}"); 
             
             Console.ReadLine();
         }
